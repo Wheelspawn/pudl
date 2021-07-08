@@ -451,7 +451,7 @@ class SmallTable(FERCTable):
             header_value = header_group[
                 header_group['is_good_header']]['header_prep_clean']
             if not header_value.empty:
-                header_group.insert(3, 'header', header_value.item())
+                header_group.insert(6, 'header', header_value.item())
             return header_group
 
         logger.info(" - assigning headers to groups")
@@ -507,7 +507,7 @@ class SmallTable(FERCTable):
 
         df = self.df
         # Create a new column that merges zane's manual labeling with my programatic labeling
-        df.insert(3, 'header_manual_code_combo', df.header.fillna(df.plant_type))
+        df.insert(6, 'header_manual_code_combo', df.header.fillna(df.plant_type))
 
         print('')
         print('header matches manual plant type:', len(
@@ -542,7 +542,7 @@ class SmallTable(FERCTable):
     def flag_totals(self):
         """Flagging FERC Table Totals."""
         super().flag_totals()
-        flag_totals_basic(self.df)
+        flag_totals_basic(self.df, insert_at=6)
 
     def label_fuel(self):
         """Label FERC Table Fuel Types."""
@@ -554,6 +554,7 @@ class SmallTable(FERCTable):
         self._create_header_col(self.zane_header_labels)
         self._add_obvious_headers(self.zane_header_labels)
         self._show_header_stats()
+        self.df.drop(columns=['header_type', 'is_header'], inplace=True)
 
 
 class HydroTable(FERCTable):

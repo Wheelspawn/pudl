@@ -35,10 +35,10 @@ cost_list = ['chgs', 'indirect', 'exp']
 #######################################################################################
 
 
-def flag_totals_basic(df):
+def flag_totals_basic(df, insert_at=3):
     """Blah."""
     logger.info(" - using basic total flag")
-    df.insert(3, 'is_total', False)
+    df.insert(insert_at, 'is_total', False)
     df.loc[df['plant_name_ferc1'].str.contains('total'), 'is_total'] = True
 
     return df
