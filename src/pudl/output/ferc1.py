@@ -247,9 +247,7 @@ def all_plants_ferc1(pudl_engine):
     integration with the EIA Master Unit List (MUL). All subtables included in this
     output table must have pudl ids. Table prepping involves ensuring that
     the individual tables can merge correctly (like columns have the same name)
-    both with eachother and the EIA MUL.
-
-    If mul_cols = True then include only columns used for MUL matching.
+    both with each other and the EIA MUL.
 
     """
     logger.info("loading steam table")
